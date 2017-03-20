@@ -9,7 +9,7 @@ JSON message "repeater" on your network.
 
 # Overview
 
-This server can be viewed as a simple JSON message repeater. To explain the server's capabilities, consider a browser App 
+To explain the server's capabilities, consider a browser App 
 called ClientA, that sends messages to another browser App called ClientB. All messages must be 
 valid JSON messages. The word message in this document refers to a valid JSON message.
 
@@ -21,17 +21,19 @@ Any Client can be both publisher and subscriber at the same time.
 The default server behaviour is to automatically publish and subscribe Clients to a default "json" topic.
 This means any message can be sent and received without further ado.
 
-To receive only messages of a specific topic, ClientB needs to send a "subscribe" command message to the server 
+To receive only messages of a specific set of topics, ClientB needs to send a "subscribe" command message to the server 
 such as: 
 
-    {"mikanType": "subscribe", "topic": topicName}
+    {"mikanType": "subscribe", topic": [topic1, topic2, ...]}
+
+where "topic" must be an array of string. A Client can subscribe to multiple topics.
 
 For ClientA to publish messages to a particular topic, it needs to send the server a "publish" command message 
 such as: 
 
     {"mikanType": "publish", "topic": topicName}
 
-Currently a Client can have only one topic active at any one time. To change topic 
+A Client can publish to only one topic at any one time. To change topic 
 a Client has to send another message with a new topic name. Both publish and subscribe topics
  remain in effect until a new topic name is received by the server.
 
@@ -41,7 +43,7 @@ The filter is setup by sending a "filter" command message such as:
 
     {"mikanType": "filter", "script": codeString}
      
-Where "codeString" is a string that contains JavaScript code. The server will run that code on behalf of the Client to filter the messages it wants to receive.
+where "codeString" is a string that contains JavaScript code. The server will run that code on behalf of the Client to filter the messages it wants to receive.
 
 As the target use is high speed and throughput, the server has built-in cluster capabilities. 
 In addition, the server can run with a database to record all messages, or without a database (default).
@@ -51,13 +53,13 @@ In addition, the server can run with a database to record all messages, or witho
 
 As can be seen from the Overview there are only 3 command messages that a client can send to the server. 
 Each, sets the server into a state specific for that client. The server state for that Client remains 
-in effect until a new command message replaces the previous one. To turn off (i.e. return to default) the 
+in effect until a new command message replaces the previous one. Note that these commands messages are 
+not published to other Clients. To turn off (i.e. return to default) a 
 Client can send a message with an empty value. For example:
 
-    {"mikanType": "subscribe", "topic": ""}
+    {"mikanType": "subscribe", "topic": []}
 
-This command sets the Client to subscribe to the default topic "json". Note that these commands messages are 
-not published to other Clients. 
+This command sets the Client to subscribe to the default topic "json". 
 
 #### Filtering messages
 

@@ -39,8 +39,8 @@ package object Mikan {
     implicit val fmt = Format(theReads, theWrites)
   }
 
-  // {"mikanType": "subscribe", "topic": topicName}
-  case class MikanSubscribe(topic: String) extends MikanMsg {
+  // {"mikanType": "subscribe", "topic": [topic1, topic2,...]}
+  case class MikanSubscribe(topic: Array[String]) extends MikanMsg {
     val mikanType = MikanSubscribe.mikanType
   }
 

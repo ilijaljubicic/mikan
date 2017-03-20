@@ -44,10 +44,10 @@ class ClientSocket(val account: Account, val clientList: mutable.Map[String, Act
   // the name of the default topic to subscribe to
   val defaultTopic = "json"
 
-  // the current topic to subscribed to
-  var subsTopic = defaultTopic
+  // the current topic list subscribed to, should always include the default topic
+  val subsTopicList = mutable.ListBuffer[String](defaultTopic)
 
-  // the current topic to publish to
+  // the current topic to publish to, either the default or a named topic, never empty
   var pubTopic = defaultTopic
 
   // todo must supervise the child actors
@@ -69,11 +69,30 @@ class ClientSocket(val account: Account, val clientList: mutable.Map[String, Act
       Json.fromJson[MikanMsg](msg).asOpt match {
 
         case Some(mikan: MikanSubscribe) =>
-          // unsubscribe from the last topic
-          mediator ! Unsubscribe(subsTopic, self)
-          // must not have an empty topic
-          subsTopic = if (mikan.topic.isEmpty) defaultTopic else mikan.topic
-          mediator ! Subscribe(subsTopic, self)
+          if (mikan.topic.nonEmpty) {
+            // unsubscribe to all topics
+            subsTopicList.foreach(topic => mediator ! Unsubscribe(topic, self))
+            subsTopicList.clear()
+            // if all entries in the array of topics are empty, subscribe to the default topic
+            if(mikan.topic.forall(topic => topic.isEmpty)) {
+              subsTopicList += defaultTopic
+              mediator ! Subscribe(defaultTopic, self)
+            } else {
+              // subscribe to the new list
+              mikan.topic.foreach(topic => {
+                if (topic.nonEmpty) {
+                  subsTopicList += topic
+                  mediator ! Subscribe(topic, self)
+                }
+              })
+            }
+          } else {
+            // unsubscribe to all topics, but not the default topic
+            subsTopicList.foreach(topic => if (topic != defaultTopic) mediator ! Unsubscribe(topic, self))
+            subsTopicList.clear()
+            // make sure the defaultTopic is in the list
+            subsTopicList += defaultTopic
+          }
 
         case Some(mikan: MikanPublish) =>
           pubTopic = if (mikan.topic.isEmpty) defaultTopic else mikan.topic
@@ -94,7 +113,7 @@ class ClientSocket(val account: Account, val clientList: mutable.Map[String, Act
       }
 
     // send to this client the json msg from all other publisher clients (subject to filtering)
-    // note: only InternalMsg with the topic this client is subscribed to arrive here
+    // note: only InternalMsg with the topics this client is subscribed to arrive here
     case msg: InternalMsg =>
       // do not send me back the msg I published
       if (msg.accId != account.accId) {
@@ -107,6 +126,10 @@ class ClientSocket(val account: Account, val clientList: mutable.Map[String, Act
       }
 
     case x => logger.info(s"received an unknown message type: $x")
+  }
+
+  private def unsubscribeToAll() = {
+    subsTopicList.foreach(topic => mediator ! Unsubscribe(topic, self))
   }
 
 }
