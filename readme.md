@@ -131,8 +131,6 @@ To customise the server cluster capabilities edit the "cluster" settings in appl
  Basically add more "nodes" as required. For a detail description of setting up a cluster refer to 
  [Cluster Usage](http://doc.akka.io/docs/akka/current/scala/cluster-usage.html).
 
-......todo explain the -Dakka.remote.netty.tcp.port=2552
-
 #### Websocket
 
 The websocket endpoint that a Client should connect to, is: **mikanjson** 
@@ -148,8 +146,8 @@ launches the server on localhost and port 9000. So a Client needs to connect
  
      ws://localhost:9000/mikanjson
 
-Customise this to suit your particular environment  
-(note there is no need to include the port number in production environment).
+Customise this to suit your particular environment, note there is no need 
+to include the port number in production environment.
 
 # Requirements
 Must have Java 8 installed.
@@ -207,12 +205,6 @@ clientB.html is an example of a browser App subscribing to messages of the topic
 Similarly, cesiumClientB.html is an example browser App receiving the JSON messages 
 from clientA.html. It displays the received messages on the [Cesium 3D globe](https://cesiumjs.org/).
 
-
- 
- 
-.....
-
-# .....
 
 # Status
 
