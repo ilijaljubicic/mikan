@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<title>ClientA</title>
+<script language="javascript" type="text/javascript">
+
+// point your browser to: http://localhost:9000/
+
+  var wsUri = "ws://localhost:9000/mikanjson";
+
+  var output;
+  var repeater;
+
+  var pubMsg = {"mikanType": "publish", "topic": "entity"};
+
+  var subMsg = {"mikanType": "subscribe", "topic": "entity"};
+
+  function init()
+  {
+    output = document.getElementById("output");
+    websocket = new WebSocket(wsUri);
+    websocket.onopen = function(evt) { onOpen(evt) };
+    websocket.onclose = function(evt) { onClose(evt) };
+    websocket.onmessage = function(evt) { onMessage(evt) };
+    websocket.onerror = function(evt) { onError(evt) };
+  }
+
+  function onOpen(evt)
+  {
+    writeToScreen("WEBSOCKET CONNECTED");
+    doSend(pubMsg);
+    // near Sydney Australia
+    repeater = window.setInterval(function(){
+        var lat = -34.1 + Math.random();
+        var lon = 151.2 + Math.random();
+        var alt = 200.0 + Math.random() * 20.0;
+        var theMsg =  {"MessageKind": "AttributeUpdate", "ObjectName": "aircraft1", "Coordinates": [lat,lon,alt] };
+        doSend(theMsg)
+       }, 3000);
+  }
+
+  function onClose(evt)
+  {
+    window.clearInterval(repeater);
+    writeToScreen("WEBSOCKET DISCONNECTED");
+  }
+
+  function onMessage(evt)
+  {
+    writeToScreen('<span style="color: blue;">RECEIVED: ' + evt.data+'</span>');
+  }
+
+  function onError(evt)
+  {
+    writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+  }
+
+  function doSend(message)
+  {
+    writeToScreen("SENDING: " + JSON.stringify(message));
+    websocket.send(JSON.stringify(message));
+  }
+
+  function writeToScreen(message)
+  {
+    var pre = document.createElement("p");
+    pre.style.wordWrap = "break-word";
+    pre.innerHTML = message;
+    output.appendChild(pre);
+  }
+
+  window.addEventListener("load", init, false);
+
+</script>
+
+<h2>Publisher ClientA</h2>
+
+<div id="output"></div>
+</body>
+
+

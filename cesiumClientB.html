@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Use correct character set. -->
+  <meta charset="utf-8">
+  <!-- Tell IE to use the latest, best version. -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <title>Cesium ClientB</title>
+  <script src="../Build/Cesium/Cesium.js"></script>
+  <style>
+      @import url(../Build/Cesium/Widgets/widgets.css);
+      html, body, #cesiumContainer {
+          width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+      }
+  </style>
+</head>
+<body>
+<div id="cesiumContainer" class="fullSize"></div>
+<script id="cesium_script">
+
+// expect to receive JSON messages such as:
+// {"MessageKind": "AttributeUpdate", "ObjectName": "aircraft1", "Coordinates": [lat,lon,alt] }
+
+// put this file in the ./Cesium-1.31/Apps directory
+// launch cesium using: node server.js
+// then point your browser to: http://localhost:8080/Apps/cesiumClientB.html
+
+  var viewer = new Cesium.Viewer('cesiumContainer');
+
+  // near Sydney Australia
+  var center = Cesium.Cartesian3.fromDegrees(151.2, -34.1, 2000);
+  viewer.camera.lookAt(center, new Cesium.Cartesian3(0.0, 0.0, 4200000.0));
+
+  var objList = [];
+  var wsUri = "ws://localhost:9000/mikanjson";
+
+  var subMsg = {"mikanType": "subscribe", "topic": "entity"};
+
+  function init()
+  {
+    websocket = new WebSocket(wsUri);
+    websocket.onopen = function(evt) { onOpen(evt) };
+    websocket.onclose = function(evt) { onClose(evt) };
+    websocket.onmessage = function(evt) { onMessage(evt) };
+    websocket.onerror = function(evt) { onError(evt) };
+  }
+
+  function onOpen(evt)
+  {
+    writeToScreen("CONNECTED");
+    doSend(subMsg);
+  }
+
+  function onClose(evt)
+  {
+    writeToScreen("DISCONNECTED");
+  }
+
+  function onMessage(evt)
+  {
+ //  writeToScreen("received: "+ evt.data);
+   
+   var obj = JSON.parse(evt.data);
+
+   if(obj.MessageKind === "AttributeUpdate"){
+
+   if (typeof obj.Coordinates === 'undefined') {
+      writeToScreen("no Coordinates");
+   } else {
+    // find the obj in the objList
+    var tempObj = objList.find(function(objx) { return objx.ObjectName == obj.ObjectName });
+    if (tempObj === undefined) {
+    // add a new obj
+    objList.push(obj);
+    writeToScreen("Coordinates: "+obj.Coordinates);
+    var coord = obj.Coordinates;
+    var latitude = coord[0];
+    var longitude = coord[1];
+    var alt = coord[2];
+  viewer.entities.add({
+    id: obj.ObjectName,
+    position : Cesium.Cartesian3.fromDegrees(longitude, latitude, alt),
+    billboard : {
+        image : './Sandcastle/images/facility.gif'
+    }
+	});
+	}
+	else {
+	// do update
+    writeToScreen("update Coordinates: "+obj.Coordinates);
+    var coord = obj.Coordinates;
+    var latitude = coord[0];
+    var longitude = coord[1];
+    var alt = coord[2];
+    var theEntity = viewer.entities.getById(obj.ObjectName);
+    theEntity.position = Cesium.Cartesian3.fromDegrees(longitude, latitude, alt);
+	}
+	} // if (obj.Coordinates === undefined)
+
+	}  // if(obj.MessageKind === "AttributeUpdate")
+
+} // onMessage(evt)
+
+  function onError(evt)
+  {
+    writeToScreen(evt.data);
+  }
+
+  function doSend(message)
+  {
+    writeToScreen("SENDING: " + JSON.stringify(message));
+    websocket.send(JSON.stringify(message));
+  }
+
+  function writeToScreen(message)
+  {
+    console.log(message);
+  }
+
+  window.addEventListener("load", init, false);
+
+  </script>
+</body>
+</html>
