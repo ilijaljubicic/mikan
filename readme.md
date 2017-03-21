@@ -51,7 +51,7 @@ In addition, the server can run with a database to record all messages, or witho
 
 # Details
 
-As can be seen from the Overview there are only 3 command messages that a client can send to the server. 
+As can be seen from the [Overview](#overview) there are only 3 command messages that a client can send to the server. 
 Each, sets the server into a state specific for that client. The server state for that Client remains 
 in effect until a new command message replaces the previous one. Note that these commands messages are 
 not published to other Clients. To turn off (i.e. return to default) a 
