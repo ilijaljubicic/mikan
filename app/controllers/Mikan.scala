@@ -70,9 +70,9 @@ class Mikan @Inject()(val global: OnServerStart, val messagesApi: MessagesApi,
 //  val testPub: ActorRef = system.actorOf(TestPublisher.props(mediator, dbService, dbAccess))
 
   // todo --> for testing
-  def index = Action.async { implicit request =>
-    Future(Ok(views.html.index()))
-  }
+//  def index = Action.async { implicit request =>
+//    Future(Ok(views.html.index()))
+//  }
 
   // todo --> create a random User account
   private def checkUser(request: RequestHeader): Option[Account] = {
