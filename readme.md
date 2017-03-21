@@ -73,7 +73,7 @@ The following example illustrates its use. Suppose ClientA is a flight simulator
 ClientB wants to receive all "entity" from the simulator, but only those 
 between latitudes 10 and 20 degrees. 
 To create a filter for this, ClientB writes a bit of JavaScript code and sends it 
-to the server using a "filter" message as described in the Overview. 
+to the server using a "filter" message as described in the [Overview](#overview). 
 For example:
 
     function filter(data) {
