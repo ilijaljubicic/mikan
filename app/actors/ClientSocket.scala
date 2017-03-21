@@ -14,7 +14,6 @@ import play.api.libs.json.{JsValue, _}
 import scala.collection.mutable
 import scala.language.implicitConversions
 
-
 /**
   * A json message publish-subscribe actor.
   *
