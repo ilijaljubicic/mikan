@@ -1,5 +1,5 @@
 
-GET     /                  controllers.Mikan.index()
+# GET     /                  controllers.Mikan.index()
 
 GET     /mikanjson         controllers.Mikan.mikanjson
 
