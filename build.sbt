@@ -30,7 +30,7 @@ val scalacOptions = Seq(
 
 // By default, the dist task will include the API documentation in the generated package.
 // these will not include them
-sources in (Compile, doc) := Seq.empty
+//sources in (Compile, doc) := Seq.empty
 
-publishArtifact in (Compile, packageDoc) := false
+//publishArtifact in (Compile, packageDoc) := false
 

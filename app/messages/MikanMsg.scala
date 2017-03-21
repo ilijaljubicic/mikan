@@ -4,7 +4,9 @@ import play.api.libs.json._
 
 
 /**
-  * the Mikan protocol
+  * the Mikan protocol command messages.
+  * They set the server into different states for the
+  * specific client that sent the commands.
   */
 package object Mikan {
 
@@ -12,7 +14,13 @@ package object Mikan {
     val mikanType: String
   }
 
-  // {"mikanType": "filter", "script": codeString}
+  /**
+    * tells the server how to filter messages to send to the client
+    *
+    * {"mikanType": "filter", "script": codeString}
+    *
+    * @param script a string of JavaScript code that must include a function filter(data) {..}
+    */
   case class MikanFilter(script: String) extends MikanMsg {
     val mikanType = MikanFilter.mikanType
   }
@@ -39,7 +47,13 @@ package object Mikan {
     implicit val fmt = Format(theReads, theWrites)
   }
 
-  // {"mikanType": "subscribe", "topic": [topic1, topic2, ...]}
+  /**
+    * tells the server the client is interested in receiving messages of only these topics.
+    *
+    * {"mikanType": "subscribe", "topic": [topic1, topic2, ...]}
+    *
+    * @param topic array of string topic name
+    */
   case class MikanSubscribe(topic: Array[String]) extends MikanMsg {
     val mikanType = MikanSubscribe.mikanType
   }
@@ -66,7 +80,13 @@ package object Mikan {
     implicit val fmt = Format(theReads, theWrites)
   }
 
-  // {"mikanType": "publish", "topic": topicName}
+  /**
+    * tells the server the topic name to publish the client messages to
+    *
+    * {"mikanType": "publish", "topic": topicName}
+    *
+    * @param topic the string topic name
+    */
   case class MikanPublish(topic: String) extends MikanMsg {
     val mikanType = MikanPublish.mikanType
   }
@@ -118,7 +138,6 @@ package object Mikan {
     }
 
     implicit val fmt: Format[MikanMsg] = Format(theReads, theWrites)
-
   }
 
 }

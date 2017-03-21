@@ -73,7 +73,7 @@ class ClientSocket(val account: Account, val clientList: mutable.Map[String, Act
             subsTopicList.foreach(topic => mediator ! Unsubscribe(topic, self))
             subsTopicList.clear()
             // if all entries in the array of topics are empty, subscribe to the default topic
-            if(mikan.topic.forall(topic => topic.isEmpty)) {
+            if(mikan.topic.forall(_.isEmpty)) {
               subsTopicList += defaultTopic
               mediator ! Subscribe(defaultTopic, self)
             } else {

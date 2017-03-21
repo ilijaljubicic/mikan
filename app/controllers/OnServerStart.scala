@@ -4,8 +4,7 @@ import javax.inject._
 
 import db.{AccountDao, MsgDao}
 import play._
-import play.api.i18n.MessagesApi
-import play.modules.reactivemongo.ReactiveMongoApi
+import scala.language.postfixOps
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
