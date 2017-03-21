@@ -59,7 +59,7 @@ Client can send a message with an empty value. For example:
 
     {"mikanType": "subscribe", "topic": []}
 
-This command sets the Client to subscribe to the default topic "json". 
+This command sets the Client to subscribe to the default topic "json", the catch all topic. 
 
 #### Filtering messages
 
