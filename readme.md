@@ -1,6 +1,6 @@
 # Mikan server 
 
-This server allows connected applications to talk to each other across the internet, like a typical Chat App.
+This server allows connected applications to talk to each other across a network, like a typical Chat App.
 Application types include browser apps. The idea is to have large numbers of client Apps, 
 sending and receiving JSON messages to each other, all at the same time. 
 The server can be used in many different ways, the aim however is for high throughput 
@@ -21,12 +21,16 @@ Any Client can be both publisher and subscriber at the same time.
 The default server behaviour is to automatically publish and subscribe Clients to a default "json" topic.
 This means any message can be sent and received without further ado.
 
+### Subscribe
+
 To receive only messages of a specific set of topics, ClientB needs to send a "subscribe" command message to the server 
 such as: 
 
     {"mikanType": "subscribe", topic": [topic1, topic2, ...]}
 
 where "topic" must be an array of string. A Client can subscribe to multiple topics.
+
+### Publish
 
 For ClientA to publish messages to a particular topic, it needs to send the server a "publish" command message 
 such as: 
@@ -36,6 +40,8 @@ such as:
 A Client can publish to only one topic at any one time. To change topic 
 a Client has to send another message with a new topic name. Both publish and subscribe topics
  remain in effect until a new topic name is received by the server.
+
+### Filter
 
 Another feature of the **Mikan server**, is the ability for the Clients to send the server a filter.
 This lets the server filter messages in addition to the topic.
@@ -73,7 +79,7 @@ The following example illustrates its use. Suppose ClientA is a flight simulator
 ClientB wants to receive all "entity" from the simulator, but only those 
 between latitudes 10 and 20 degrees. 
 To create a filter for this, ClientB writes a bit of JavaScript code and sends it 
-to the server using a "filter" message as described in the [Overview](#overview). 
+to the server using a "filter" message as described in the [Filter section](#filter). 
 For example:
 
     function filter(data) {
