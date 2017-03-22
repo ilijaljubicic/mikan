@@ -158,7 +158,7 @@ Customise this to suit your particular environment, note there is no need
 to include the port number in production environment.
 
 # Requirements
-Must have Java 8 installed.
+Must have [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html) and [SBT](http://www.scala-sbt.org/) installed.
 
 # Installation and running the server
 Download or clone this repository, then unpack the source code to a directory of your choice.
@@ -176,7 +176,7 @@ The "sbt dist" generates a script called "mikan" to run the server. If need be, 
  
     chmod +x mikan
 
-Then type in a terminal:
+Then to run the server, type in a terminal:
 
     mikan -Dplay.crypto.secret=the-secret-key-generated-by-play
 
@@ -216,7 +216,7 @@ from clientA.html. It displays the received messages on the [Cesium 3D globe](ht
 
 # Status
 
-very experimental
+early experimental
 
 
 
