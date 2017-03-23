@@ -74,7 +74,7 @@ of messages received by Clients, the **Mikan server**
 provides in addition to topic subscription a filtering based on JavaScript code. 
 The following example illustrates its use. Suppose ClientA is a flight simulator sending large numbers of messages of this type; 
 
-    {"entity": "aircraft", "lat": 12.3, "lon": 45.6}.
+    {"entity": "aircraft", "lat": 12.3, "lon": 45.6, "alt": 789.0}.
 
 ClientB wants to receive all "entity" from the simulator, but only those 
 between latitudes 10 and 20 degrees. 
