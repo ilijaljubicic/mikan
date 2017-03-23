@@ -1,0 +1,95 @@
+
+---------------------------------------------
+---------from code, run locally--------------
+---------------------------------------------
+// to run mikan locally using sbt:
+sbt run -Dhttp.port=9000
+
+// then try the examples; clientA.html with clientB.html to see if they work.
+
+
+// deployable server:
+
+// create the play.crypto.secret:
+sbt playGenerateSecret
+
+// to run mikan in production mode, first:
+sbt dist
+
+// this produces a ZIP file containing all JAR files needed to run the application
+// in the ./target/universal folder
+
+// unzip the mikan-1.0-SNAPSHOT.zip
+// then
+// cd to the target/universal/mikan-1.0-SNAPSHOT/bin
+
+// make sure have permission to execute
+chmod +x mikan
+
+// "sbt dist" has produced a script called "mikan" to run the application:
+mikan -Dplay.crypto.secret=thesecretkeygeneratedbyplay
+
+---------------------------------------------
+-------------mongoDB-------------------------
+---------------------------------------------
+// install mongoDB
+//see: https://docs.mongodb.com/manual/
+
+// make sure the mongo server is running, in a terminal:
+mongod
+
+// in another terminal, the mongo shell:
+mongo
+
+// the name of the mongo database to use
+use orange
+
+// to show what is in the database
+show collections
+
+// to create a collection
+db.createCollection("accounts")
+db.createCollection("clientmsg")
+
+// to delete a collection
+db.accounts.drop()
+db.clientmsg.drop()
+
+// to list what is in a collection
+db.accounts.find().pretty()
+db.clientmsg.find().pretty()
+
+---------------------------------------------
+----------heroku-----------------------------
+---------------------------------------------
+// to deploy on heroku
+
+heroku login
+Email:
+Password:
+
+// to create an app:
+heroku create servermikan
+> ....lots of stuff, then something like
+>https://servermikan.herokuapp.com/
+
+// to push the mikan code to heroku:
+git push heroku master
+>https://servermikan.herokuapp.com/
+
+// that's it, servermikan app should be running on your heroku
+// try the examples; clientA.html with clientB.html to see if they work.
+
+// to open heroku
+heroku open
+
+// to show some logs:
+heroku logs -t
+
+// to run heroku localy:
+sbt compile stage
+heroku local -p 7000   // because the default port 5000 maybe already taken
+
+to restart:
+heroku restart
+heroku logs -t
