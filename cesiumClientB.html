@@ -69,19 +69,17 @@
    if (typeof obj.Coordinates === 'undefined') {
       writeToScreen("no Coordinates");
    } else {
+    var coord = obj.Coordinates.WorldLocation;
+    writeToScreen("Coordinates: "+coord);
     // find the obj in the objList
     var tempObj = objList.find(function(objx) { return objx.ObjectName == obj.ObjectName });
     if (tempObj === undefined) {
     // add a new obj
     objList.push(obj);
-    writeToScreen("Coordinates: "+obj.Coordinates.WorldLocation);
-    var coord = obj.Coordinates.WorldLocation;
-    var latitude = coord[0];
-    var longitude = coord[1];
-    var alt = coord[2];
+    writeToScreen("Coordinates: "+coord);
   viewer.entities.add({
     id: obj.ObjectName,
-    position : Cesium.Cartesian3.fromDegrees(longitude, latitude, alt),
+    position : Cesium.Cartesian3.fromDegrees(coord[1], coord[0], coord[2]),
     billboard : {
         image : './Sandcastle/images/facility.gif'
     }
@@ -89,16 +87,11 @@
 	}
 	else {
 	// do update
-    writeToScreen("update Coordinates: "+obj.Coordinates.WorldLocation);
-    var coord = obj.Coordinates.WorldLocation;
-    var latitude = coord[0];
-    var longitude = coord[1];
-    var alt = coord[2];
+    writeToScreen("update Coordinates: "+coord);
     var theEntity = viewer.entities.getById(obj.ObjectName);
-    theEntity.position = Cesium.Cartesian3.fromDegrees(longitude, latitude, alt);
+    theEntity.position = Cesium.Cartesian3.fromDegrees(coord[1], coord[0], coord[2]);
 	}
 	} // if (obj.Coordinates === undefined)
-
 	}  // if(obj.MessageKind === "AttributeUpdate")
 
 } // onMessage(evt)
