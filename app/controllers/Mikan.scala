@@ -94,7 +94,7 @@ class Mikan @Inject()(val global: OnServerStart, val messagesApi: MessagesApi,
         checkUser(request) match {
           case None => Left(Forbidden)
           case Some(account) =>
-            logger.info(s"in webSocketJson account: ${account.accId}")
+            logger.info(s"in mikanjson account: ${account.accId}")
             if (account.role == Account.Admin)
               Right(ActorFlow.actorRef(out => ServerManager.props(account, clientList)(out, mediator, dbService, dbAccess)))
             else

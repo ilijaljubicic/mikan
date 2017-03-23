@@ -206,9 +206,10 @@ user access. The default server behaviour is "without a database", that means no
 # Example clients
 
 clientA.html is an example of a browser JavaScript App publishing messages to the **Mikan server**. It 
-publishes JSON messages to the topic named "entity".
+publishes JSON messages to the topic named "WebLVC:PhysicalEntity".
 
-clientB.html is an example of a browser App subscribing to messages of the topic named "entity".
+clientB.html is an example of a browser App subscribing to messages 
+of the topic named "WebLVC:PhysicalEntity" and "WebLVC:EnvironmentalEntity".
 
 Similarly, cesiumClientB.html is an example browser App receiving the JSON messages 
 from clientA.html. It displays the received messages on the [Cesium 3D globe](https://cesiumjs.org/).
@@ -216,7 +217,7 @@ from clientA.html. It displays the received messages on the [Cesium 3D globe](ht
 
 # Status
 
-early experimental
+experimental
 
 
 

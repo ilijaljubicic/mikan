@@ -3,11 +3,19 @@
 <title>ClientB</title>
 <script language="javascript" type="text/javascript">
 
+//------------------------------------------
+//-----------ClientB subscriber ------------
+//------------------------------------------
+
   var wsUri = "ws://localhost:9000/mikanjson";
 
   var output;
 
-  var subMsg = {"mikanType": "subscribe", "topic": ["entity"]};
+  var subMsg = {"mikanType": "subscribe", "topic": ["WebLVC:PhysicalEntity", "WebLVC:EnvironmentalEntity"]};
+
+  var theScript = "function filter(data) { var obj = JSON.parse(data); if(obj.Coordinates.WorldLocation[2] > 510.0 && obj.Coordinates.WorldLocation[2] < 519.0 && (obj.Coordinates.WorldLocation[2] != 512.0) || (obj.Coordinates.WorldLocation[2] == 513.0)) return true; return false;  }"
+  var filterMsg = {"mikanType": "filter", "script": theScript};
+
 
   function init()
   {
@@ -23,6 +31,7 @@
   {
     writeToScreen("WEBSOCKET CONNECTED");
     doSend(subMsg);
+    doSend(filterMsg);
   }
 
   function onClose(evt)

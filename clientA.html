@@ -3,12 +3,16 @@
 <title>ClientA</title>
 <script language="javascript" type="text/javascript">
 
+//------------------------------------------
+//-----------ClientA publisher -------------
+//------------------------------------------
+
   var wsUri = "ws://localhost:9000/mikanjson";
 
   var output;
   var repeater;
 
-  var pubMsg = {"mikanType": "publish", "topic": "entity"};
+   var pubMsg = {"mikanType": "publish", "topic": "WebLVC:PhysicalEntity"};
 
   function init()
   {
@@ -28,9 +32,9 @@
     repeater = window.setInterval(function(){
         var lat = -34.1 + Math.random();
         var lon = 151.2 + Math.random();
-        var alt = 200.0 + Math.random() * 20.0;
-        var theMsg =  {"MessageKind": "AttributeUpdate", "ObjectName": "aircraft1", "Coordinates": [lat,lon,alt] };
-        doSend(theMsg)
+        var alt = 500.0 + Math.random() * 20.0;
+        var upAttMsg = {"MessageKind" : "AttributeUpdate","ObjectName" : "aircraft_1", "ObjectType" : "WebLVC:PhysicalEntity","Timestamp" : "time-is-now", "Marking": "erratic-aircraft", "Coordinates": { "WorldLocation": [lat,lon,alt], "VelocityVector": [400.0, 400.0, 4.0] } };
+        doSend(upAttMsg)
        }, 3000);
   }
 

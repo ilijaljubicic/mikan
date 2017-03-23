@@ -21,7 +21,7 @@
 <script id="cesium_script">
 
 // expect to receive JSON messages such as:
-// {"MessageKind": "AttributeUpdate", "ObjectName": "aircraft1", "Coordinates": [lat,lon,alt] }
+// {"MessageKind" : "AttributeUpdate", "ObjectName" : "aircraft_1", "ObjectType" : "WebLVC:PhysicalEntity","Timestamp" : "time-is-now", "Marking": "erratic-aircraft", "Coordinates": { "WorldLocation": [lat,lon,alt], "VelocityVector": [400.0, 400.0, 4.0] } };
 
 // put this file in the ./Cesium-1.31/Apps directory
 // launch cesium using: node server.js
@@ -29,14 +29,14 @@
 
   var viewer = new Cesium.Viewer('cesiumContainer');
 
-  // near Sydney Australia
+  // zoom to near Sydney Australia
   var center = Cesium.Cartesian3.fromDegrees(151.2, -34.1, 2000);
   viewer.camera.lookAt(center, new Cesium.Cartesian3(0.0, 0.0, 4200000.0));
 
   var objList = [];
   var wsUri = "ws://localhost:9000/mikanjson";
 
-  var subMsg = {"mikanType": "subscribe", "topic": ["entity"]};
+  var subMsg = {"mikanType": "subscribe", "topic": ["WebLVC:PhysicalEntity"]};
 
   function init()
   {
@@ -74,8 +74,8 @@
     if (tempObj === undefined) {
     // add a new obj
     objList.push(obj);
-    writeToScreen("Coordinates: "+obj.Coordinates);
-    var coord = obj.Coordinates;
+    writeToScreen("Coordinates: "+obj.Coordinates.WorldLocation);
+    var coord = obj.Coordinates.WorldLocation;
     var latitude = coord[0];
     var longitude = coord[1];
     var alt = coord[2];
@@ -89,8 +89,8 @@
 	}
 	else {
 	// do update
-    writeToScreen("update Coordinates: "+obj.Coordinates);
-    var coord = obj.Coordinates;
+    writeToScreen("update Coordinates: "+obj.Coordinates.WorldLocation);
+    var coord = obj.Coordinates.WorldLocation;
     var latitude = coord[0];
     var longitude = coord[1];
     var alt = coord[2];
