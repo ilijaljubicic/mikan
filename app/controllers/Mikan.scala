@@ -49,7 +49,7 @@ class Mikan @Inject()(val global: OnServerStart, val messagesApi: MessagesApi,
   // provide database services
   val dbService: ActorRef = system.actorOf(DBService.props(dbAccess))
 
-  // the actor that manages a registry of actor references and replicates
+  // the actor that manages a registry of actors and replicates
   // the entries to peer actors among all cluster nodes tagged with a specific role.
   val mediator: ActorRef = DistributedPubSub(system).mediator
   implicit val node = Cluster(system)

@@ -8,11 +8,7 @@ import scala.util.{Failure, Success, Try}
   * filtering data using the Nashorn engine
   */
 object Filter {
-  // the JavaScript engine
   val engine = new ScriptEngineManager().getEngineByName("nashorn")
-  //      val bindings = engine.createBindings()
-  //      bindings.put("ocr", ocr)
-  //      bindings.put("vision", vision)
   val invocable = engine.asInstanceOf[Invocable]
 }
 
