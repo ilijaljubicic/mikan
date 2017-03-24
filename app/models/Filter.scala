@@ -3,30 +3,35 @@ package models
 import javax.script.{Invocable, ScriptEngineManager}
 import play.api.libs.json.JsValue
 import scala.util.{Failure, Success, Try}
+//import delight.nashornsandbox.NashornSandboxes
+import java.util.concurrent.Executors
 
 /**
   * filtering data using the Nashorn engine
   */
 object Filter {
-  val engine = new ScriptEngineManager().getEngineByName("nashorn")
-  val invocable = engine.asInstanceOf[Invocable]
-}
+  // see: https://github.com/javadelight/delight-nashorn-sandbox
+  // The sandbox by default blocks access to all Java classes
+  // val sandbox = NashornSandboxes.create
+  // limiting the CPU time of scripts
+  // sandbox.setMaxCPUTime(1000)
+  // sandbox.setExecutor(Executors.newSingleThreadExecutor)
+  // sandbox.allow(classOf[someJavaClass])
 
-/**
-  * filter data messages by evaluating a JavaScript function
-  */
-abstract class Filter(val theJavaScript: String) {
+  def createJsonFilter(theJavaScript: String): Option[FilterJsonMsg] = {
+    val logger = org.slf4j.LoggerFactory.getLogger("models.Filter")
+    val engine = new ScriptEngineManager().getEngineByName("nashorn")
+    val invocable = engine.asInstanceOf[Invocable]
 
-  import Filter._
+    // evaluate the javascript
+    Try(engine.eval(theJavaScript)) match {
+      case Success(x) =>
+        logger.info(s"-----> script: \n $x ")
+        Option(new FilterJsonMsg(theJavaScript, invocable))
 
-  protected val logger = org.slf4j.LoggerFactory.getLogger("models.Filter")
-
-  // evaluate the javascript
-  Try(engine.eval(theJavaScript)) match {
-    case Success(x) => logger.info(s"-----> script: \n $x ")
-    case Failure(x) => logger.info(s"-----> could not evaluate script: \n $x ")
+      case Failure(x) =>
+        logger.info(s"-----> could not evaluate script: \n $x ")
+        None
+    }
   }
-
-  // return true if the data is accepted else return false
-  def accept(data: JsValue): Boolean
 }

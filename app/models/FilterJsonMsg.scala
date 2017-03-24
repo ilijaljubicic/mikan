@@ -1,15 +1,15 @@
 package models
 
+import javax.script.Invocable
+
 import play.api.libs.json.JsValue
-import play.libs.Json
 
 /**
   * a filter of json messages.
   * evaluate a javascript containing a "filter(data)" function
   */
-class FilterJsonMsg(val clientScript: String) extends Filter(clientScript) {
-
-  import Filter._
+class FilterJsonMsg(val clientScript: String, invocable: Invocable) {
+  val logger = org.slf4j.LoggerFactory.getLogger("models.FilterJsonMsg")
 
   // return true if the data has passed the filter or no filter function found,
   // else return false  ---> todo what if errors true or false

@@ -11,6 +11,9 @@ val akkaVersion = "2.4.17"
 val reactivemongoVersion = "0.12.1"
 
 libraryDependencies ++= Seq(
+  "org.eclipse.xtend" % "org.eclipse.xtend.lib.gwt" % "2.11.0",
+  "org.eclipse.xtend" % "org.eclipse.xtend.lib" % "2.11.0",
+  "org.javadelight" % "delight-nashorn-sandbox" % "0.0.8",
   "com.typesafe.play.extras" %% "play-geojson" % "1.4.0",
   "org.reactivemongo" %% "play2-reactivemongo" % reactivemongoVersion,
   "com.typesafe.akka" %% "akka-cluster" % akkaVersion,
@@ -21,9 +24,4 @@ libraryDependencies ++= Seq(
 
 routesGenerator := InjectedRoutesGenerator
 
-val scalacOptions = Seq(
-  "-Xlint",
-  "-unchecked",
-  "-deprecation",
-  "-feature"
-)
+val scalacOptions = Seq("-Xlint", "-unchecked", "-deprecation", "-feature")
