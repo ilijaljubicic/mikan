@@ -23,7 +23,9 @@ class FilterJsonMsg(val clientScript: String, invocable: Invocable) {
           invocable.invokeFunction("filter", data).asInstanceOf[Boolean]
         } catch {
           // return false on any errors
-          case ex: Throwable => logger.info(s"-----> error in the filter function: \n $ex"); false
+          case ex: Throwable =>
+            logger.info(s"-----> error in the filter function: \n $ex")
+            false
         }
     }
   }

@@ -9,7 +9,7 @@ import java.util.concurrent.Executors
 /**
   * filtering data using the Nashorn engine
   */
-object Filter {
+object FilterBuilder {
   // see: https://github.com/javadelight/delight-nashorn-sandbox
   // The sandbox by default blocks access to all Java classes
   // val sandbox = NashornSandboxes.create

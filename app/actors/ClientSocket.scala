@@ -8,7 +8,7 @@ import akka.event.LoggingReceive
 import db.DataBaseAccess
 import messages.InternalMsg
 import messages.Mikan._
-import models.{Account, Filter, FilterJsonMsg}
+import models.{Account, FilterBuilder, FilterJsonMsg}
 import play.api.libs.json.{JsValue, _}
 
 import scala.collection.mutable
@@ -99,7 +99,7 @@ class ClientSocket(val account: Account, val clientList: mutable.Map[String, Act
         case Some(mikan: MikanFilter) =>
           // if the msg contains a filter, create a filter engine with the given script
           if (mikan.script.isEmpty) filterEngine = None // this turns the filter off
-          else filterEngine = Filter.createJsonFilter(mikan.script)
+          else filterEngine = FilterBuilder.createJsonFilter(mikan.script)
 
         // not a command msg
         case None =>

@@ -35,7 +35,7 @@
     <logger name="controllers" level="DEBUG"/>
 
     <!-- models -->
-    <logger name="models.Filter" level="OFF"/>
+    <logger name="models.FilterBuilder" level="OFF"/>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
