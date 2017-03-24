@@ -63,7 +63,7 @@ class Mikan @Inject()(val global: OnServerStart, val messagesApi: MessagesApi,
   // todo --> handle TCP connections to clients
   // val tcpSocket =
 
-  // handle UDP connections to json clients
+  // handle UDP connections
   val udpSocket: ActorRef = system.actorOf(UDPSocket.props(clientList)(mediator, dbService, dbAccess))
 
   // todo --> for testing ... a test publishing service

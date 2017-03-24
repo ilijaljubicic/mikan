@@ -29,7 +29,7 @@ class UDPSocket(val clientList: mutable.Map[String, ActorRef],
     // have a connection
     case Udp.Bound(local) =>
       // todo --> for testing create a random User account
-      val userAccount = new Account("account_" + Random.nextInt(222).toString, Account.User, "testname")
+      val userAccount = new Account("account_" + Random.nextInt(10000).toString, Account.User, "testname")
       val userSocketProxy = system.actorOf(
         JsonUdpProxy.props(userAccount, clientList)(sender(), mediator, dbService, dbAccess)
       )

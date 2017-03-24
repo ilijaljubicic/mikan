@@ -58,10 +58,10 @@ class ClientSocket(val account: Account, val clientList: mutable.Map[String, Act
   def receive: Receive = LoggingReceive {
 
     // acknowledge subscription to a topic
-    case SubscribeAck(Subscribe(topic, None, `self`)) => logger.info(s"subscribed to: $topic")
+    case SubscribeAck(Subscribe(topic, None, `self`)) => logger.info(s"SubscribeAck: $topic")
 
     // acknowledge unsubscribe from a topic
-    case UnsubscribeAck(Unsubscribe(topic, None, `self`)) => logger.info(s"unsubscribe from: $topic")
+    case UnsubscribeAck(Unsubscribe(topic, None, `self`)) => logger.info(s"UnsubscribeAck: $topic")
 
     // process the json msg received from this client connection
     case msg: JsValue =>

@@ -26,7 +26,7 @@ class JsonUdpProxy(val account: Account, val clientList: mutable.Map[String, Act
   private val logger = org.slf4j.LoggerFactory.getLogger("actors.JsonUdpProxy")
 
   // the actor that will do all json processing
-  val clientSocket = system.actorOf(ClientSocket.props(account, clientList)(out, mediator, dbService, dbAccess))
+  val clientSocket = system.actorOf(ClientSocket.props(account, clientList)(self, mediator, dbService, dbAccess))
 
   var theAddress: InetSocketAddress = _
 
