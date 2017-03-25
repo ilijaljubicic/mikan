@@ -1,9 +1,12 @@
 package models
 
 import java.util.concurrent.Executors
+import javax.inject.Inject
+
 import delight.nashornsandbox.NashornSandboxes
-import play.api.Play
+import play.Configuration
 import play.api.libs.json.JsValue
+
 import scala.util.{Failure, Success, Try}
 
 /**
@@ -15,8 +18,8 @@ import scala.util.{Failure, Success, Try}
   */
 class FilterJsonMsg (val clientScript: String) {
 
-  // get the max cpu time the script can use from application.conf
-  val cpuTime = Play.current.configuration.getLong("mikan.filter.cputime").getOrElse(200L)
+  @Inject() val conf = Configuration.root()
+  val cpuTime = conf.getLong("mikan.filter.cputime", 200L)
 
   // the sandbox by default blocks access to all Java classes
   val sandbox = NashornSandboxes.create
