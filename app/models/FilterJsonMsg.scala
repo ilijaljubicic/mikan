@@ -13,7 +13,15 @@ import scala.util.{Failure, Success, Try}
   * passed in as a string
   */
 class FilterJsonMsg(val clientScript: String) {
-  import FilterJsonMsg._
+
+  // see: https://github.com/javadelight/delight-nashorn-sandbox
+  // The sandbox by default blocks access to all Java classes
+  val sandbox = NashornSandboxes.create
+  // limiting the CPU time of scripts
+  sandbox.setMaxCPUTime(200)
+  sandbox.setExecutor(Executors.newSingleThreadExecutor)
+  // allow to pass the json message as a string
+  sandbox.allow(classOf[String])
 
   val logger = org.slf4j.LoggerFactory.getLogger("models.FilterJsonMsg")
 
@@ -34,15 +42,4 @@ class FilterJsonMsg(val clientScript: String) {
     }
   }
 
-}
-
-object FilterJsonMsg {
-  // see: https://github.com/javadelight/delight-nashorn-sandbox
-  // The sandbox by default blocks access to all Java classes
-  val sandbox = NashornSandboxes.create
-  // limiting the CPU time of scripts
-  sandbox.setMaxCPUTime(200)
-  sandbox.setExecutor(Executors.newSingleThreadExecutor)
-  // allow to pass the json message as a string
-  sandbox.allow(classOf[String])
 }
