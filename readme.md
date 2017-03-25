@@ -168,8 +168,8 @@ Must have [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index
 
 # Installation and running the server
 
-For testing and requiring only [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html) installed, a compiled ready to run mikan server is in the "dist" directory.
-Make your way to the "bin" directory and at a terminal/command prompt type: 
+For testing and requiring only [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html) installed, 
+a compiled ready to run mikan server is in the "dist" directory. Unzip the file, make your way to the "bin" directory and at a terminal/command prompt type: 
 
     mikan
 
