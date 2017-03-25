@@ -54,15 +54,6 @@ class Mikan @Inject()(val global: OnServerStart, val messagesApi: MessagesApi,
   val mediator: ActorRef = DistributedPubSub(system).mediator
   implicit val node = Cluster(system)
 
-  // todo --> handle all DIS connections to simulations/clients
-  // val disSocket: ActorRef = system.actorOf(DisSocket.props())
-
-  // todo --> handle all HLA connections to an RTI
-  // val hlaSocket: ActorRef = system.actorOf(HlaSocket.props())
-
-  // todo --> handle TCP connections to clients
-  // val tcpSocket =
-
   // handle UDP connections
   val udpSocket: ActorRef = system.actorOf(UDPSocket.props(clientList)(mediator, dbService, dbAccess))
 
