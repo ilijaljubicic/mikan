@@ -79,17 +79,14 @@ The following example illustrates its use. Suppose ClientA is a flight simulator
 ClientB wants to receive all "entity" from the simulator, but only those 
 between latitudes 10 and 20 degrees. 
 To create a filter for this, ClientB writes a bit of JavaScript code and sends it 
-to the server using a "filter" message as described in the [Filter section](#filter). 
+to the server (as a string) using a "filter" message as described in the [Filter section](#filter). 
 For example:
 
-    function filter(data) {
-        var obj = JSON.parse(data);
-        if(obj.lat > 10 && obj.lat < 20) return true;
-        return false;
-    }
+    var obj = JSON.parse(msg);
+    if (obj.lat > 10 && obj.lat < 20) true else false;
     
-The JavaScript code must have a function called **filter** that takes a parameter, which in our case 
-is expected to be a message from the simulator. 
+The JavaScript code must use the named parameter **msg** to refer to the message injected into the script 
+by the server as a string.
 It must also return either **true** if we want to receive the message 
 or **false** to stop the message. Using such filtering in combination with topic subscription, a Client can 
 fine-tune the messages it receives. A Client can replace the current "filter" by sending a new message.
