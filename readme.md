@@ -214,7 +214,8 @@ clientA.html is an example of a browser JavaScript App publishing messages to th
 publishes JSON messages to the topic named "WebLVC:PhysicalEntity".
 
 clientB.html is an example of a browser App subscribing to messages 
-of the topic named "WebLVC:PhysicalEntity" and "WebLVC:EnvironmentalEntity".
+of the topic named "WebLVC:PhysicalEntity" and "WebLVC:EnvironmentalEntity". It also 
+contains a JavaScript filter example.
 
 Similarly, cesiumClientB.html is an example browser App receiving the JSON messages 
 from clientA.html. It displays the received messages on the [Cesium 3D globe](https://cesiumjs.org/).
