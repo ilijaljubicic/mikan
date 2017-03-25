@@ -95,12 +95,20 @@ can send a "filter" message with an empty "script" value, such as:
 
     {"mikanType": "filter", "script": ""}
 
-Although the filter is constructed with JavaScript code, the Client App does not have to be a browser or JavaScript App.
+Although the filter is constructed with JavaScript code, the Client App does not have 
+to be a browser or JavaScript App.
 
 ### Server settings
 
 The **Mikan server** settings are found in the **appication.conf** file in the "conf" directory. 
-This file can be edited to control various functions, such as the database and the clustering. 
+This file can be edited to control various functions, such as filtering, the database and clustering. 
+
+#### Filtering
+To limit the amount of time the CPU can use to evaluate a JavaScript filter the following can be set:
+
+    mikan.filter.cputime=200
+
+where 200 is in milliseconds and is also the default value. 
 
 #### Database
 The server can be set to record all non-command messages to a database. To enable this set:

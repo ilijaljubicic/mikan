@@ -8,6 +8,7 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 scalaVersion := "2.11.8"
 
 val akkaVersion = "2.4.17"
+
 val reactivemongoVersion = "0.12.1"
 
 libraryDependencies ++= Seq(
@@ -15,6 +16,7 @@ libraryDependencies ++= Seq(
   "org.eclipse.xtend" % "org.eclipse.xtend.lib" % "2.11.0",
   "org.javadelight" % "delight-nashorn-sandbox" % "0.0.8",
   "com.typesafe.play.extras" %% "play-geojson" % "1.4.0",
+  "com.typesafe.play" %% "play-json" % "2.6.0-M5",
   "org.reactivemongo" %% "play2-reactivemongo" % reactivemongoVersion,
   "com.typesafe.akka" %% "akka-cluster" % akkaVersion,
   "com.typesafe.akka" %% "akka-cluster-tools" % akkaVersion,
