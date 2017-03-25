@@ -167,7 +167,15 @@ to include the port number in production environment.
 Must have [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html) and [SBT](http://www.scala-sbt.org/) installed.
 
 # Installation and running the server
-Download or clone this repository, then unpack the source code to a directory of your choice.
+
+For testing and requiring only [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html) installed, a compiled ready to run mikan server is in the "dist" directory.
+Make your way to the "bin" directory and at a terminal/command prompt type: 
+
+    mikan
+
+This will run the server on your PC. Note it takes a bit of time to startup. I will put a fresh copy in "dist" from time to time.
+
+For a more up-to-date version, download or clone this repository, then unpack the source code to a directory of your choice.
 
 To setup the **Mikan server** for running, type in a terminal:
 

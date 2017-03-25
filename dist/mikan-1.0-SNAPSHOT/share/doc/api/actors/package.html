@@ -1,0 +1,366 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>actors - actors</title>
+          <meta name="description" content="actors - actors" />
+          <meta name="keywords" content="actors actors" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../lib/template.js"></script>
+      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../index.html';
+            var hash = 'actors.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img alt="Package" src="../lib/package_big.png" />
+        
+        <h1>actors</h1><span class="permalink">
+      <a href="../index.html#actors.package" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">actors</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        
+        
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="actors.ClientSocket" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ClientSocketextendsActorwithActorLogging"></a>
+      <a id="ClientSocket:ClientSocket"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ClientSocket.html"><span class="name">ClientSocket</span></a><span class="result"> extends <span class="extype" name="akka.actor.Actor">Actor</span> with <span class="extype" name="akka.actor.ActorLogging">ActorLogging</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#actors.package@ClientSocketextendsActorwithActorLogging" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A json message publish-subscribe actor.</p><div class="fullcomment"><div class="comment cmt"><p>A json message publish-subscribe actor.</p><p>This actor will publish all json messages it receives (except the commands MikanMsg types),
+and
+send to its client all json messages it is subscribed to
+</p></div></div>
+    </li><li name="actors.ClusterRoom" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ClusterRoomextendsActorwithActorLogging"></a>
+      <a id="ClusterRoom:ClusterRoom"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ClusterRoom.html"><span class="name">ClusterRoom</span></a><span class="result"> extends <span class="extype" name="akka.actor.Actor">Actor</span> with <span class="extype" name="akka.actor.ActorLogging">ActorLogging</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#actors.package@ClusterRoomextendsActorwithActorLogging" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">cluster event listener
+</p>
+    </li><li name="actors.DBService" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DBServiceextendsActorwithActorLogging"></a>
+      <a id="DBService:DBService"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="DBService.html"><span class="name">DBService</span></a><span class="result"> extends <span class="extype" name="akka.actor.Actor">Actor</span> with <span class="extype" name="akka.actor.ActorLogging">ActorLogging</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#actors.package@DBServiceextendsActorwithActorLogging" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="actors.DisSocket" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="DisSocketextendsActor"></a>
+      <a id="DisSocket:DisSocket"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="DisSocket.html"><span class="name">DisSocket</span></a><span class="result"> extends <span class="extype" name="akka.actor.Actor">Actor</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#actors.package@DisSocketextendsActor" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">manage a socket to DIS simulations and send the data for processing.</p><div class="fullcomment"><div class="comment cmt"><p>manage a socket to DIS simulations and send the data for processing.</p><p>see also: https://github.com/typesafehub/activator-akka-stream-java8/blob/master/src/main/java/sample/stream/TcpTLSEcho.java</p></div></div>
+    </li><li name="actors.JsonUdpProxy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JsonUdpProxyextendsActor"></a>
+      <a id="JsonUdpProxy:JsonUdpProxy"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="JsonUdpProxy.html"><span class="name">JsonUdpProxy</span></a><span class="result"> extends <span class="extype" name="akka.actor.Actor">Actor</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#actors.package@JsonUdpProxyextendsActor" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">receive UDP ByteString, translate them to json and pass them onto a ClientSocket actor,
+and
+send the ClientSocket responses as UPD ByteString to the client
+</p>
+    </li><li name="actors.ServerManager" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ServerManagerextendsActorwithActorLogging"></a>
+      <a id="ServerManager:ServerManager"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ServerManager.html"><span class="name">ServerManager</span></a><span class="result"> extends <span class="extype" name="akka.actor.Actor">Actor</span> with <span class="extype" name="akka.actor.ActorLogging">ActorLogging</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#actors.package@ServerManagerextendsActorwithActorLogging" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Manage the server activities from a websocket connection.</p>
+    </li><li name="actors.TestPublisher" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TestPublisherextendsActor"></a>
+      <a id="TestPublisher:TestPublisher"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="TestPublisher.html"><span class="name">TestPublisher</span></a><span class="result"> extends <span class="extype" name="akka.actor.Actor">Actor</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#actors.package@TestPublisherextendsActor" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="actors.UDPSocket" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UDPSocketextendsActor"></a>
+      <a id="UDPSocket:UDPSocket"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="UDPSocket.html"><span class="name">UDPSocket</span></a><span class="result"> extends <span class="extype" name="akka.actor.Actor">Actor</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#actors.package@UDPSocketextendsActor" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">manage UDP socket connections for clients exchanging messages.</p>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="actors.ClientSocket" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ClientSocket"></a>
+      <a id="ClientSocket:ClientSocket"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ClientSocket$.html"><span class="name">ClientSocket</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#actors.package@ClientSocket" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="actors.DBService" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DBService"></a>
+      <a id="DBService:DBService"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="DBService$.html"><span class="name">DBService</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#actors.package@DBService" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">provides database services for Accounts and InternalMsg</p>
+    </li><li name="actors.DisSocket" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DisSocket"></a>
+      <a id="DisSocket:DisSocket"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="DisSocket$.html"><span class="name">DisSocket</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#actors.package@DisSocket" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="actors.JsonUdpProxy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JsonUdpProxy"></a>
+      <a id="JsonUdpProxy:JsonUdpProxy"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="JsonUdpProxy$.html"><span class="name">JsonUdpProxy</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#actors.package@JsonUdpProxy" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="actors.ServerManager" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ServerManager"></a>
+      <a id="ServerManager:ServerManager"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ServerManager$.html"><span class="name">ServerManager</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#actors.package@ServerManager" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="actors.TestPublisher" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TestPublisher"></a>
+      <a id="TestPublisher:TestPublisher"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="TestPublisher$.html"><span class="name">TestPublisher</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#actors.package@TestPublisher" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A test publisher, publishing random InternalMsg.</p>
+    </li><li name="actors.UDPSocket" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UDPSocket"></a>
+      <a id="UDPSocket:UDPSocket"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="UDPSocket$.html"><span class="name">UDPSocket</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#actors.package@UDPSocket" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

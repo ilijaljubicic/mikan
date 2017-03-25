@@ -1,0 +1,201 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>db - db</title>
+          <meta name="description" content="db - db" />
+          <meta name="keywords" content="db db" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../lib/template.js"></script>
+      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../index.html';
+            var hash = 'db.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img alt="Package" src="../lib/package_big.png" />
+        
+        <h1>db</h1><span class="permalink">
+      <a href="../index.html#db.package" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">db</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        
+        
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="db.AccountDao" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="AccountDaoextendsAnyRef"></a>
+      <a id="AccountDao:AccountDao"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="AccountDao.html"><span class="name">AccountDao</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#db.package@AccountDaoextendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@ImplementedBy</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="db.DataBaseAccess" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DataBaseAccessextendsProductwithSerializable"></a>
+      <a id="DataBaseAccess:DataBaseAccess"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="DataBaseAccess.html"><span class="name">DataBaseAccess</span></a><span class="params">(<span name="userDao">userDao: <a href="AccountDao.html" class="extype" name="db.AccountDao">AccountDao</a></span>, <span name="msgDao">msgDao: <a href="MsgDao.html" class="extype" name="db.MsgDao">MsgDao</a></span>, <span name="withDatabase">withDatabase: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#db.package@DataBaseAccessextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">for convenience keep the database access objects
+</p>
+    </li><li name="db.MongoAccountDao" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="MongoAccountDaoextendsAccountDao"></a>
+      <a id="MongoAccountDao:MongoAccountDao"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="MongoAccountDao.html"><span class="name">MongoAccountDao</span></a><span class="result"> extends <a href="AccountDao.html" class="extype" name="db.AccountDao">AccountDao</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#db.package@MongoAccountDaoextendsAccountDao" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">implementation of the data access object for user Accounts
+</p><div class="fullcomment"><div class="comment cmt"><p>implementation of the data access object for user Accounts
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@Singleton</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="db.MongoMsgDao" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="MongoMsgDaoextendsMsgDao"></a>
+      <a id="MongoMsgDao:MongoMsgDao"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="MongoMsgDao.html"><span class="name">MongoMsgDao</span></a><span class="result"> extends <a href="MsgDao.html" class="extype" name="db.MsgDao">MsgDao</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#db.package@MongoMsgDaoextendsMsgDao" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">DAO implementation for MsgDao</p><div class="fullcomment"><div class="comment cmt"><p>DAO implementation for MsgDao</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@Singleton</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="db.MsgDao" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="MsgDaoextendsAnyRef"></a>
+      <a id="MsgDao:MsgDao"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="MsgDao.html"><span class="name">MsgDao</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#db.package@MsgDaoextendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@ImplementedBy</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>
