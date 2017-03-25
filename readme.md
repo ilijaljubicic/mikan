@@ -3,9 +3,10 @@
 This server allows connected applications to talk to each other across a network, like a typical Chat App.
 Application types include browser apps. The idea is to have large numbers of client Apps, 
 sending and receiving JSON messages to each other, all at the same time. 
-The server can be used in many different ways, the aim however is for high throughput 
-simulations and games to talk to each other. With this server you can setup a versatile 
-JSON message "repeater" on your network.
+The server can be used in many different ways, the aim however is for high 
+throughput applications such as simulations and games to talk to each other. 
+With this server you can setup a versatile 
+JSON message "broker" on your network or in the cloud.
 
 # Overview
 
@@ -164,7 +165,8 @@ Customise this to suit your particular environment, note there is no need
 to include the port number in production environment.
 
 # Requirements
-Must have [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html) and [SBT](http://www.scala-sbt.org/) installed.
+Must have [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html) 
+installed to run the server and it is very useful to have [SBT](http://www.scala-sbt.org/) as well.
 
 # Installation and running the server
 
@@ -177,7 +179,7 @@ This will run the server on your PC. Note it takes a bit of time to startup. I w
 
 For a more up-to-date version, download or clone this repository, then unpack the source code to a directory of your choice.
 
-To setup the **Mikan server** for running, type in a terminal:
+Using [SBT](http://www.scala-sbt.org/) the **Mikan server** can be setup for running by typing in a terminal:
 
     sbt dist
 
