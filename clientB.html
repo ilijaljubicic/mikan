@@ -13,9 +13,9 @@
 
   var subMsg = {"mikanType": "subscribe", "topic": ["WebLVC:PhysicalEntity", "WebLVC:EnvironmentalEntity"]};
 
-  // the script must use the variable "msg" passed in as a string to refer to the
+  // the script must use the variable "mikanMsg" passed in as a string to refer to the
   // message it is filtering, and must return true or false
-  var theScript = "var obj = JSON.parse(msg); if(obj.Coordinates.WorldLocation[2] > 510.0 && obj.Coordinates.WorldLocation[2] < 519.0 && (obj.Coordinates.WorldLocation[2] != 512.0) || (obj.Coordinates.WorldLocation[2] == 513.0)) true else false; "
+  var theScript = "var obj = JSON.parse(mikanMsg); if(obj.Coordinates.WorldLocation[2] > 510.0 && obj.Coordinates.WorldLocation[2] < 519.0 && (obj.Coordinates.WorldLocation[2] != 512.0) || (obj.Coordinates.WorldLocation[2] == 513.0)) true else false; "
 
   var filterMsg = {"mikanType": "filter", "script": theScript};
 

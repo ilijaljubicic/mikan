@@ -31,8 +31,9 @@ class FilterJsonMsg (val clientScript: String) {
   // return true if the msg has passed the filter or has errors,
   // else return false
   def accept(msg: JsValue): Boolean = {
-    // inject the msg, the filter must use the "msg" variable provided as a string
-    sandbox.inject("msg", msg.toString)
+    // inject the msg, the filter must use the name "mikanMsg" provided as a string
+    // to refer to the message inside the script
+    sandbox.inject("mikanMsg", msg.toString)
     // run the script with the given msg
     Try(sandbox.eval(clientScript)) match {
       case Success(result) =>

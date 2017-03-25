@@ -82,10 +82,10 @@ To create a filter for this, ClientB writes a bit of JavaScript code and sends i
 to the server (as a string) using a "filter" message as described in the [Filter section](#filter). 
 For example:
 
-    var obj = JSON.parse(msg);
+    var obj = JSON.parse(mikanMsg);
     if (obj.lat > 10 && obj.lat < 20) true else false;
     
-The JavaScript code must use the named parameter **msg** to refer to the message injected into the script 
+The JavaScript code must use the named parameter **mikanMsg** to refer to the message injected into the script 
 by the server as a string.
 It must also return either **true** if we want to receive the message 
 or **false** to stop the message. Using such filtering in combination with topic subscription, a Client can 
@@ -96,7 +96,8 @@ can send a "filter" message with an empty "script" value, such as:
     {"mikanType": "filter", "script": ""}
 
 Although the filter is constructed with JavaScript code, the Client App does not have 
-to be a browser or JavaScript App.
+to be a browser or JavaScript App. Note that any errors in the JavaScript evaluation will 
+result in the message going through (return true).
 
 ### Server settings
 
