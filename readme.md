@@ -6,7 +6,7 @@ sending and receiving JSON messages to each other, all at the same time.
 The server can be used in many different ways, the aim however is for high 
 throughput applications such as simulations and games to talk to each other. 
 With this server you can setup a versatile 
-JSON message "broker" on your network or in the cloud.
+JSON message "repeater" on your network or in the cloud.
 
 # Overview
 
@@ -165,8 +165,9 @@ Customise this to suit your particular environment, note there is no need
 to include the port number in production environment.
 
 # Requirements
-Must have [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html) 
-installed to run the server and it is very useful to have [SBT](http://www.scala-sbt.org/) as well.
+[Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html) 
+is required to be installed to run the server, and it is very useful to have [SBT](http://www.scala-sbt.org/) 
+as well to compile and run from the source code.
 
 # Installation and running the server
 

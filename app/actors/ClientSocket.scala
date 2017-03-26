@@ -107,6 +107,7 @@ class ClientSocket(val account: Account, val clientList: mutable.Map[String, Act
           val internalMsg = InternalMsg(msg, account.accId, pubTopic, LocalDateTime.now().toString)
           // store the message
           if (dbAccess.withDatabase) dbService ! internalMsg
+          // todo ---> if no client is listening (clientList.isEmpty+1) maybe should not publish
           // publish the message
           mediator ! Publish(pubTopic, internalMsg)
       }
