@@ -1,0 +1,8 @@
+2017-03-27 22:21:38,986 [INFO] from akka.event.slf4j.Slf4jLogger in application-akka.actor.default-dispatcher-4 - Slf4jLogger started
+2017-03-27 22:21:44,247 [DEBUG] from play.api.libs.concurrent.ActorSystemProvider in ForkJoinPool-1-worker-1 - Starting application default Akka system: application
+2017-03-27 22:21:44,298 [INFO] from play.api.Play in ForkJoinPool-1-worker-1 - Application started (Dev)
+2017-03-27 22:21:44,366 [DEBUG] from controllers.Mikan in application-akka.actor.default-dispatcher-15 - originCheck: originValue = file://
+2017-03-27 22:21:44,402 [INFO] from controllers.Mikan in application-akka.actor.default-dispatcher-15 - in mikanjson account: account_9681
+2017-03-27 22:21:44,426 [INFO] from actors.ClientSocket in application-akka.actor.default-dispatcher-2 - SubscribeAck: json
+2017-03-27 22:21:44,426 [INFO] from actors.ClientSocket in application-akka.actor.default-dispatcher-14 - SubscribeAck: json
+2017-03-27 22:21:55,412 [DEBUG] from play.api.libs.concurrent.ActorSystemProvider in pool-6-thread-4 - Shutdown application default Akka system: application
