@@ -30,8 +30,6 @@ class FilterJsonMsg(val clientScript: String) {
   // limiting the CPU time of the script
   sandbox.setMaxCPUTime(cpuTime)
   sandbox.setExecutor(Executors.newSingleThreadExecutor)
-  // allow to pass the json message as a string
-  sandbox.allow(classOf[String])
 
   // check the script
   Try(sandbox.eval(clientScript)) match {
@@ -42,16 +40,16 @@ class FilterJsonMsg(val clientScript: String) {
   // return true if the msg has passed the filter or has errors,
   // else return false
   def accept(msg: JsValue): Boolean = {
-    val filterFunc = sandbox.get("filter").asInstanceOf[ScriptObjectMirror]
-    filterFunc match {
+    sandbox.get("filter").asInstanceOf[ScriptObjectMirror] match {
       // if have no function or some error return true
       case null => true
-      case ok =>
+
+      case filtering =>
         try {
-          // invoke the function with msg as argument, return the result as a boolean
-          filterFunc.call(this, msg).asInstanceOf[Boolean]
+          // invoke the filter function with msg as argument, return the result as a boolean
+          filtering.call(this, msg).asInstanceOf[Boolean]
         } catch {
-          // return true on any errors
+          // return true on any error
           case ex: Throwable =>
             logger.error(s"-----> error in the filter function: \n $ex")
             true
