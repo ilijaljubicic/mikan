@@ -44,7 +44,7 @@ class FilterJsonMsg(val clientScript: String) {
   def accept(msg: JsValue): Boolean = {
     val filterFunc = sandbox.get("filter").asInstanceOf[ScriptObjectMirror]
     filterFunc match {
-      // if have no function return true
+      // if have no function or some error return true
       case null => true
       case ok =>
         try {
