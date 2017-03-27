@@ -58,7 +58,7 @@ In addition, the server can run with a database to record all messages, or witho
 
 # Details
 
-As can be seen from the [Overview](#overview) there are only 3 command messages that a client can send to the server. 
+As can be seen from the [Overview](#overview) there are only 3 simple command messages that a client can send to the server. 
 Each, sets the server into a state specific for that client. The server state for that Client remains 
 in effect until a new command message replaces the previous one. Note that these commands messages are 
 not published to other Clients. To turn off (i.e. return to default) a 
@@ -83,12 +83,13 @@ To create a filter for this, ClientB writes a bit of JavaScript code and sends i
 to the server (as a string) using a "filter" message as described in the [Filter section](#filter). 
 For example:
 
-    var obj = JSON.parse(mikanMsg);
-    if (obj.lat > 10 && obj.lat < 20) true else false;
+    function filter(msg) { 
+      var obj = JSON.parse(msg);
+      if (obj.lat > 10 && obj.lat < 20) return true else return false;
+    }
     
-The JavaScript code must use the named parameter **mikanMsg** to refer to the message injected into the script 
-by the server as a string.
-It must also return either **true** if we want to receive the message 
+The JavaScript code must have a **function filter(msg)** that takes one argument of type string, which 
+in our case is the simlulator message. It must also return either **true** if we want to receive the message 
 or **false** to stop the message. Using such filtering in combination with topic subscription, a Client can 
 fine-tune the messages it receives. A Client can replace the current "filter" by sending a new message.
 At present only one "filter" can be active at any given time. To turn this type of filtering off, a Client 
