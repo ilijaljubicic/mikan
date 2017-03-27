@@ -37,8 +37,12 @@ class FilterJsonMsg(val clientScript: String) {
     case Failure(x) => logger.error(s" could not evaluate script: $x ")
   }
 
-  // return true if the msg has passed the filter or has errors,
-  // else return false
+  /**
+    * return true if the msg has passed the filter or has errors, else return false
+    *
+    * @param msg the json msg as a string to test
+    * @return true if the msg has passed the filter or has errors, else return false
+    */
   def accept(msg: JsValue): Boolean = {
     sandbox.get("filter").asInstanceOf[ScriptObjectMirror] match {
       // if have no function or some error return true

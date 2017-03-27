@@ -6,7 +6,7 @@ import javax.inject._
 import actors._
 import akka.actor._
 import play.api.i18n.{I18nSupport, MessagesApi}
-import play.api.mvc.{Action, RequestHeader, WebSocket}
+import play.api.mvc.{RequestHeader, WebSocket}
 
 import scala.concurrent.{ExecutionContext, Future}
 import play.api.libs.json.JsValue
@@ -19,7 +19,6 @@ import db.{AccountDao, DataBaseAccess, MsgDao}
 import models.Account
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
 
-import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.Random
 import scala.collection._
 
@@ -58,12 +57,13 @@ class Mikan @Inject()(val global: OnServerStart, val messagesApi: MessagesApi,
   val udpSocket: ActorRef = system.actorOf(UDPSocket.props(clientList)(mediator, dbService, dbAccess))
 
   // todo --> for testing ... a test publishing service
-//  val testPub: ActorRef = system.actorOf(TestPublisher.props(mediator, dbService, dbAccess))
+  //  val testPub: ActorRef = system.actorOf(TestPublisher.props(mediator, dbService, dbAccess))
 
   // todo --> for testing
-//  def index = Action.async { implicit request =>
-//    Future(Ok(views.html.index()))
-//  }
+  //  def index = Action.async { implicit request =>
+  //   println("\n-------< request.host: "+request.host)
+  //    Future(Ok(views.html.index()))
+  //  }
 
   // todo --> create a random User account
   private def checkUser(request: RequestHeader): Option[Account] = {
@@ -123,11 +123,10 @@ class Mikan @Inject()(val global: OnServerStart, val messagesApi: MessagesApi,
   /**
     * returns true if the value of the Origin header contains an acceptable value.
     */
-  // todo get values from application.conf
   private def originMatches(origin: String): Boolean = {
-    true
-    //  origin.contains("localhost:9000") || origin.contains("localhost:19001")
+    val port = global.configuration.getInt("mikan.port", 9000)
+    val host = global.configuration.getString("mikan.host", "0.0.0.0")
+    logger.info("originMatches: host: $host port: $port")
+    origin.contains(s"$host:$port") || origin.contains("file://")
   }
-
-
 }
