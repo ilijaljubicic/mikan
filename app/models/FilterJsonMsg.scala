@@ -20,16 +20,7 @@ import scala.util.{Failure, Success, Try}
   */
 class FilterJsonMsg(val clientScript: String) {
 
-  val logger = org.slf4j.LoggerFactory.getLogger("models.FilterJsonMsg")
-
-  @Inject() val conf = Configuration.root()
-  // get the time limit for the script
-  val cpuTime = conf.getLong("mikan.filter.cputime", 200L)
-  // the sandbox by default blocks access to all Java classes
-  val sandbox = NashornSandboxes.create
-  // limiting the CPU time of the script
-  sandbox.setMaxCPUTime(cpuTime)
-  sandbox.setExecutor(Executors.newSingleThreadExecutor)
+  import FilterJsonMsg._
 
   // check the script
   Try(sandbox.eval(clientScript)) match {
@@ -60,5 +51,17 @@ class FilterJsonMsg(val clientScript: String) {
         }
     }
   }
+}
 
+object FilterJsonMsg {
+  val logger = org.slf4j.LoggerFactory.getLogger("models.FilterJsonMsg")
+
+  @Inject() val conf = Configuration.root()
+  // get the time limit for the script
+  val cpuTime = conf.getLong("mikan.filter.cputime", 200L)
+  // the sandbox by default blocks access to all Java classes
+  val sandbox = NashornSandboxes.create
+  // limiting the CPU time of the script
+  sandbox.setMaxCPUTime(cpuTime)
+  sandbox.setExecutor(Executors.newSingleThreadExecutor)
 }
