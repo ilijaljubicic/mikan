@@ -22,10 +22,13 @@ class FilterJsonMsg(val clientScript: String) {
 
   import FilterJsonMsg._
 
+  // determine if the script can be executed
+  var scriptOk = false
+
   // check the script
   Try(sandbox.eval(clientScript)) match {
-    case Success(s) => logger.info(s" script: $s ")
-    case Failure(x) => logger.error(s" could not evaluate script: $x ")
+    case Success(s) => scriptOk = true; logger.info(s"script: $s ")
+    case Failure(x) => scriptOk = false; logger.error(s"could not evaluate script: $x ")
   }
 
   /**
@@ -35,27 +38,32 @@ class FilterJsonMsg(val clientScript: String) {
     * @return true if the msg has passed the filter or has errors, else return false
     */
   def accept(msg: JsValue): Boolean = {
-    sandbox.get("filter").asInstanceOf[ScriptObjectMirror] match {
-      // if have no function or some error return true
-      case null => true
+    // check the script can be executed
+    if (scriptOk) {
+      sandbox.get("filter").asInstanceOf[ScriptObjectMirror] match {
+        // if have no function or some error return true
+        case null => true
 
-      case filtering =>
-        try {
-          // invoke the filter function with msg as argument, return the result as a boolean
-          filtering.call(this, msg).asInstanceOf[Boolean]
-        } catch {
-          // return true on any error
-          case ex: Throwable =>
-            logger.error(s"-----> error in the filter function: \n $ex")
-            true
-        }
+        case filtering =>
+          try {
+            // invoke the filter function with msg as argument, return the result as a boolean
+            filtering.call(this, msg).asInstanceOf[Boolean]
+          } catch {
+            // return true on any error
+            case ex: Throwable =>
+              logger.error(s"-----> error in the filter function: \n $ex")
+              true
+          }
+      }
+    } else {
+      // return true if the script is no good
+      true
     }
   }
 }
 
 object FilterJsonMsg {
   val logger = org.slf4j.LoggerFactory.getLogger("models.FilterJsonMsg")
-
   @Inject() val conf = Configuration.root()
   // get the time limit for the script
   val cpuTime = conf.getLong("mikan.filter.cputime", 200L)
