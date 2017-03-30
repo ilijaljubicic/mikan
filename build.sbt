@@ -14,7 +14,7 @@ val reactivemongoVersion = "0.12.1"
 libraryDependencies ++= Seq(
   "org.eclipse.xtend" % "org.eclipse.xtend.lib.gwt" % "2.11.0",
   "org.eclipse.xtend" % "org.eclipse.xtend.lib" % "2.11.0",
-  "org.javadelight" % "delight-nashorn-sandbox" % "0.0.8",
+  "org.javadelight" % "delight-nashorn-sandbox" % "0.0.9",
   "com.typesafe.play.extras" %% "play-geojson" % "1.4.0",
   "com.typesafe.play" %% "play-json" % "2.6.0-M5",
   "org.reactivemongo" %% "play2-reactivemongo" % reactivemongoVersion,
