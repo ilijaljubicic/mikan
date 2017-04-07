@@ -144,9 +144,12 @@
 
                 // receive a new plane message and we don't have this plane yet
                 if (!(msg.newPlaneId === undefined) && (planeList.get(msg.newPlaneId) === undefined)) {
+                    writeToScreen("--> received airplane: " + msg.newPlaneId);
                     // send my plane id to all 
                     doSend(myPlaneMsg);
-                    writeToScreen("--> received airplane: " + msg.newPlaneId);
+                    // send an update as well
+                    var updateMsg = {"planeId": myPlane.planeId, "speed": myPlane.speed, "hpRoll": myPlane.hpRoll};
+                    doSend(updateMsg);
                     // create a new plane 
                     var planeObj = makePlane(false, msg.newPlaneId);
                     // add the new plane to the planeList

@@ -127,6 +127,6 @@ class Mikan @Inject()(val global: OnServerStart, val messagesApi: MessagesApi,
     val port = global.configuration.getInt("mikan.port", 9000)
     val host = global.configuration.getString("mikan.host", "0.0.0.0")
     logger.info("originMatches: host: $host port: $port")
-    origin.contains(s"$host:$port") || origin.contains("file://")
+    origin.contains(s"$host:$port") || origin.contains("file://") || origin.contains("http://localhost")
   }
 }
