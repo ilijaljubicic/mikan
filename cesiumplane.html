@@ -63,14 +63,19 @@
         </div>
 
         <script id="cesium_script">
-
-// put this file in the "./Cesium-1.32/Apps" directory.
-// launch cesium using: "node server.js" from the "./Cesium-1.32" directory.
+            
+// This is an example where you can fly a plane in Cesium 3D and see others doing the same.            
+// This is both a publisher and a subscriber of the topic "flyplane".
+// While mikan is running locally,
+// put this file in the "./Cesium-1.32/Apps" directory,
+// launch cesium using: "node server.js" from the "./Cesium-1.32" directory,
 // then point your browser to: http://localhost:8080/Apps/cesiumplane.html
-
+// open multiple browser pages with: http://localhost:8080/Apps/cesiumplane.html
+// and see the other planes.
+// 
 // todo: remove disconnected planes, page reload creates a new plane, lots of other things, .....
 
-            var gameName = "game1";
+            var gameName = "flyplane";
             var planeName = "plane_" + Math.floor((Math.random() * 100000) + 1);
 
             var fixedFrameTransform = Cesium.Transforms.localFrameToFixedFrameGenerator('north', 'west');
@@ -87,6 +92,7 @@
             var center = new Cesium.Cartesian3();
 
             var websocket;
+            // customise this to your mikan server host address
             var wsUri = "ws://localhost:9000/mikanjson";
 
             var subMsg = {"mikanType": "subscribe", "topic": [gameName]};
