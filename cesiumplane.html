@@ -72,10 +72,6 @@
 
             var gameName = "game1";
             var planeName = "plane_" + Math.floor((Math.random() * 100000) + 1);
-            var initAlt = 5000 + Math.floor((Math.random() * 500) + 1);
-            var initAlt2 = 5000 + Math.floor((Math.random() * 500) + 1);
-            var initLon = -123.0744619;
-            var initLat = 44.0503706;
 
             var fixedFrameTransform = Cesium.Transforms.localFrameToFixedFrameGenerator('north', 'west');
             var viewer = new Cesium.Viewer('cesiumContainer');
@@ -270,7 +266,7 @@
                 speedSpan.innerHTML = myPlane.speed.toFixed(1);
                 preRenderThis(myPlane);
                 if (fromBehind.checked) {
-                    // Zoom to model
+                    // zoom to model
                     Cesium.Matrix4.multiplyByPoint(myPlane.planePrimitive.modelMatrix, myPlane.planePrimitive.boundingSphere.center, center);
                     myPlane.hpRange.heading = myPlane.hpRoll.heading;
                     myPlane.hpRange.pitch = myPlane.hpRoll.pitch;
@@ -287,10 +283,11 @@
 
             function makePlane(isMyPlane, planeId)
             {
+                var initLon = -123.0744619;
+                var initLat = 44.0503706;
                 var color = Cesium.Color.PALEGOLDENROD;
-                var height = initAlt;
+                var height = 5000 + Math.floor((Math.random() * 500) + 1);
                 if (!isMyPlane) {
-                    height = initAlt2;
                     color = Cesium.Color.RED;
                 }
                 var r = 0;
