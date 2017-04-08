@@ -63,7 +63,7 @@
         </div>
 
         <script id="cesium_script">
-            
+
 // This is an example where you can fly a plane in Cesium 3D and see others doing the same.            
 // This is both a publisher and a subscriber of the topic "flyplane".
 // While mikan is running locally,
@@ -133,7 +133,6 @@
                 writeToScreen("CONNECTED");
                 doSend(subMsg);
                 doSend(pubMsg);
-                // send my plane id to all 
                 doSend(myPlaneMsg);
                 writeToScreen("--> my airplane: " + myPlane.planeId);
             }
@@ -151,10 +150,10 @@
                 // receive a new plane message and we don't have this plane yet
                 if (!(msg.newPlaneId === undefined) && (planeList.get(msg.newPlaneId) === undefined)) {
                     writeToScreen("--> received airplane: " + msg.newPlaneId);
-                    // send my plane id to all 
+                    // send my plane id to all, those who already have it will ignor it 
                     doSend(myPlaneMsg);
                     // send an update as well
-                    var updateMsg = {"planeId": myPlane.planeId, "speed": myPlane.speed, "hpRoll": myPlane.hpRoll};
+                    var updateMsg = {"planeId": myPlane.planeId, "speed": myPlane.speed, "hpRoll": myPlane.hpRoll, "position": myPlane.position};
                     doSend(updateMsg);
                     // create a new plane 
                     var planeObj = makePlane(false, msg.newPlaneId);
@@ -169,6 +168,7 @@
                     var newStateObj = Object.assign({}, planeObj);
                     newStateObj.speed = msg.speed;
                     newStateObj.hpRoll = new Cesium.HeadingPitchRoll(msg.hpRoll.heading, msg.hpRoll.pitch, msg.hpRoll.roll);
+                    newStateObj.position = new Cesium.Cartesian3(msg.position.x, msg.position.y, msg.position.z);
                     // do the update
                     planeList.set(msg.planeId, newStateObj);
                 }
@@ -255,7 +255,7 @@
                     default:
                 }
                 // send the changes to the server
-                var updateMsg = {"planeId": myPlane.planeId, "speed": myPlane.speed, "hpRoll": myPlane.hpRoll};
+                var updateMsg = {"planeId": myPlane.planeId, "speed": myPlane.speed, "hpRoll": myPlane.hpRoll, "position": myPlane.position};
                 doSend(updateMsg);
             });
 
