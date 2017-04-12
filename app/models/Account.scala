@@ -1,5 +1,7 @@
 package models
 
+import java.util.UUID
+
 import play.api.libs.json.Json
 
 /**
@@ -14,7 +16,7 @@ import play.api.libs.json.Json
   * @param email
   * @param description
   */
-case class Account(accId: String, role: String, name: String, phone: Option[String] = None,
+case class Account(accId: UUID, role: String, name: String, phone: Option[String] = None,
                    latitude: Option[Double] = None, longitude: Option[Double] = None,
                    email: Option[String] = None, description: Option[String] = None) {
 

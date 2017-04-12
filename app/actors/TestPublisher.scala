@@ -1,6 +1,7 @@
 package actors
 
 import java.time.LocalDateTime
+import java.util.UUID
 
 import scala.util.Random
 import scala.concurrent.duration._
@@ -48,7 +49,7 @@ class TestPublisher(val mediator: ActorRef, val dbService: ActorRef, val dbAcces
         val newLon = 151.2093 + Random.nextDouble * 2.0
 
         val msg = Json.obj("entity" -> "sim-aircraft", "milsymbol" -> "SUG-UCI----D", "lat" -> newLat, "lon" -> newLon)
-        val internalMsg = InternalMsg(msg, "simUser", "json", LocalDateTime.now().toString)
+        val internalMsg = InternalMsg(msg, UUID.randomUUID(), "json", LocalDateTime.now().toString)
         // store the message
         if (dbAccess.withDatabase) dbService ! internalMsg
         // publish the message

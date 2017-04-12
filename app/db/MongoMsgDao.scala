@@ -1,5 +1,7 @@
 package db
 
+import java.util.UUID
+
 import play.api.libs.json.{JsObject, Json}
 import javax.inject.{Inject, Singleton}
 
@@ -25,7 +27,7 @@ class MongoMsgDao @Inject()(playConf: Configuration, val reactiveMongoApi: React
 
   private def msgF = reactiveMongoApi.database.map(_.collection[JSONCollection](msgCol))
 
-  def find(accId: String): Future[Option[InternalMsg]] = {
+  def find(accId: UUID): Future[Option[InternalMsg]] = {
     for {
       colection <- msgF
       msg <- colection.find(Json.obj("accId" -> accId)).one[InternalMsg]
@@ -42,7 +44,7 @@ class MongoMsgDao @Inject()(playConf: Configuration, val reactiveMongoApi: React
   // get all current msg filtered by topicList and accId
   // note: if accId="" all objects will be retrieved, otherwise
   // all msg BUT NOT those with the given accId
-  def findAll(topicList: List[String], accId: String): Future[List[InternalMsg]] = {
+  def findAll(topicList: List[String], accId: UUID): Future[List[InternalMsg]] = {
     val qry = Json.obj("accId" -> Json.obj("$ne" -> accId), "topic" -> Json.obj("$in" -> topicList))
     for {
       colection <- msgF

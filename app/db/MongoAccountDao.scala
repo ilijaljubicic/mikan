@@ -1,5 +1,7 @@
 package db
 
+import java.util.UUID
+
 import models.Account
 import play.api.libs.json.{JsObject, Json}
 import javax.inject.{Inject, Singleton}
@@ -25,7 +27,7 @@ class MongoAccountDao @Inject()(playConf: Configuration, val reactiveMongoApi: R
 
   private def accountsF: Future[JSONCollection] = reactiveMongoApi.database.map(_.collection[JSONCollection](accountCol))
 
-  def find(accId: String): Future[Option[Account]] = for {
+  def find(accId: UUID): Future[Option[Account]] = for {
     accounts <- accountsF
     user <- accounts.find(Json.obj("accId" -> accId)).one[Account]
   } yield user

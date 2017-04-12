@@ -1,5 +1,7 @@
 package messages
 
+import java.util.UUID
+
 import play.api.libs.json._
 
 /**
@@ -11,7 +13,7 @@ import play.api.libs.json._
   * @param topic   the topic the msg belongs to
   * @param created the timestamp at creation
   */
-case class InternalMsg(message: JsValue, accId: String, topic: String, created: String)
+case class InternalMsg(message: JsValue, accId: UUID, topic: String, created: String)
 
 object InternalMsg {
   implicit val fmt = Json.format[InternalMsg]

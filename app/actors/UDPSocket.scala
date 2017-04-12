@@ -1,11 +1,13 @@
 package actors
 
 import java.net.InetSocketAddress
+import java.util.UUID
 
 import akka.actor.{Actor, ActorRef, PoisonPill, Props}
 import akka.io.{IO, Udp}
 import db.DataBaseAccess
 import models.Account
+
 import scala.collection.mutable
 import scala.util.Random
 
@@ -13,7 +15,7 @@ import scala.util.Random
   * manage UDP socket connections for clients exchanging messages.
   *
   */
-class UDPSocket(val clientList: mutable.Map[String, ActorRef],
+class UDPSocket(val clientList: mutable.Map[UUID, ActorRef],
                 val mediator: ActorRef, val dbService: ActorRef,
                 val dbAccess: DataBaseAccess) extends Actor {
 
@@ -29,7 +31,7 @@ class UDPSocket(val clientList: mutable.Map[String, ActorRef],
     // have a connection
     case Udp.Bound(local) =>
       // todo --> for testing create a random User account
-      val userAccount = new Account("account_" + Random.nextInt(10000).toString, Account.User, "testname")
+      val userAccount = new Account(UUID.randomUUID(), Account.User, "testname")
       val userSocketProxy = system.actorOf(
         JsonUdpProxy.props(userAccount, clientList)(sender(), mediator, dbService, dbAccess)
       )
@@ -51,7 +53,7 @@ class UDPSocket(val clientList: mutable.Map[String, ActorRef],
 
 object UDPSocket {
 
-  def props(clientList: mutable.Map[String, ActorRef])(mediator: ActorRef, dbService: ActorRef, dbAccess: DataBaseAccess) =
+  def props(clientList: mutable.Map[UUID, ActorRef])(mediator: ActorRef, dbService: ActorRef, dbAccess: DataBaseAccess) =
     Props(new UDPSocket(clientList, mediator, dbService, dbAccess))
 
 }

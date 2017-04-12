@@ -1,5 +1,7 @@
 package db
 
+import java.util.UUID
+
 import com.google.inject.ImplementedBy
 import messages.InternalMsg
 import reactivemongo.api.commands.WriteResult
@@ -10,7 +12,7 @@ import scala.concurrent.Future
 trait MsgDao {
   def save(msg: InternalMsg): Future[WriteResult]
 
-  def find(msg: String): Future[Option[InternalMsg]]
+  def find(msg: UUID): Future[Option[InternalMsg]]
 
-  def findAll(objTypeList: List[String], accId: String): Future[List[InternalMsg]]
+  def findAll(objTypeList: List[String], accId: UUID): Future[List[InternalMsg]]
 }

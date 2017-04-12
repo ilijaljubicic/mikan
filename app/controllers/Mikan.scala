@@ -39,7 +39,7 @@ class Mikan @Inject()(val global: OnServerStart, val messagesApi: MessagesApi,
   val dbAccess = DataBaseAccess(userDao, msgDao, global.withDatabase)
 
   // keep a list of currently connected clients
-  val clientList = mutable.Map[String, ActorRef]()
+  val clientList = mutable.Map[UUID, ActorRef]()
 
   // todo must supervise the actors specially the websocket
 
@@ -67,7 +67,7 @@ class Mikan @Inject()(val global: OnServerStart, val messagesApi: MessagesApi,
 
   // todo --> create a random User account
   private def checkUser(request: RequestHeader): Option[Account] = {
-    val userAccount = new Account("account_" + Random.nextInt(10000).toString, UUID.randomUUID().toString, Account.User)
+    val userAccount = new Account(UUID.randomUUID(), UUID.randomUUID().toString, Account.User)
     if (dbAccess.withDatabase) dbAccess.userDao.save(userAccount)
     Option(userAccount)
   }

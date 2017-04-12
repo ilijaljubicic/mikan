@@ -1,6 +1,7 @@
 package actors
 
 import java.net.InetSocketAddress
+import java.util.UUID
 
 import akka.actor.{Actor, ActorRef, Props}
 import akka.io.{IO, Udp}
@@ -16,7 +17,7 @@ import scala.collection.mutable
   * and
   * send the ClientSocket responses as UPD ByteString to the client
   */
-class JsonUdpProxy(val account: Account, val clientList: mutable.Map[String, ActorRef],
+class JsonUdpProxy(val account: Account, val clientList: mutable.Map[UUID, ActorRef],
                    val out: ActorRef, val mediator: ActorRef, val dbService: ActorRef,
                    val dbAccess: DataBaseAccess) extends Actor {
 
@@ -44,7 +45,7 @@ class JsonUdpProxy(val account: Account, val clientList: mutable.Map[String, Act
 
 object JsonUdpProxy {
 
-  def props(acc: Account, clientList: mutable.Map[String, ActorRef])(out: ActorRef, mediator: ActorRef, dbService: ActorRef, dbAccess: DataBaseAccess) =
+  def props(acc: Account, clientList: mutable.Map[UUID, ActorRef])(out: ActorRef, mediator: ActorRef, dbService: ActorRef, dbAccess: DataBaseAccess) =
    Props(new JsonUdpProxy(acc, clientList, out, mediator, dbService, dbAccess))
 
 }

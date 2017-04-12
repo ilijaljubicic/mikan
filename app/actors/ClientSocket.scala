@@ -1,6 +1,7 @@
 package actors
 
 import java.time.LocalDateTime
+import java.util.UUID
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import akka.cluster.pubsub.DistributedPubSubMediator._
@@ -21,17 +22,17 @@ import scala.language.implicitConversions
   * and
   * send to its client all json messages it is subscribed to
   */
-class ClientSocket(val account: Account, val clientList: mutable.Map[String, ActorRef],
+class ClientSocket(val account: Account, val clientList: mutable.Map[UUID, ActorRef],
                    val out: ActorRef, val mediator: ActorRef, val dbService: ActorRef,
                    val dbAccess: DataBaseAccess) extends Actor with ActorLogging {
 
   override def preStart(): Unit = {
-    clientList += account.name -> self
+    clientList += account.accId -> self
     super.preStart()
   }
 
   override def postStop(): Unit = {
-    clientList -= account.name
+    clientList -= account.accId
     super.postStop()
   }
 
@@ -116,7 +117,7 @@ class ClientSocket(val account: Account, val clientList: mutable.Map[String, Act
     // note: only InternalMsg with the topics this client is subscribed to arrive here
     case msg: InternalMsg =>
       // do not send me back the msg I published
-      if (msg.accId != account.accId) {
+      if (!msg.accId.equals(account.accId)) {
         filterEngine match {
           // no filter
           case None => out ! Json.toJson(msg.message)
@@ -136,7 +137,7 @@ class ClientSocket(val account: Account, val clientList: mutable.Map[String, Act
 
 object ClientSocket {
 
-  def props(acc: Account, clientList: mutable.Map[String, ActorRef])(out: ActorRef, mediator: ActorRef, dbService: ActorRef, dbAccess: DataBaseAccess) =
+  def props(acc: Account, clientList: mutable.Map[UUID, ActorRef])(out: ActorRef, mediator: ActorRef, dbService: ActorRef, dbAccess: DataBaseAccess) =
     Props(new ClientSocket(acc, clientList, out, mediator, dbService, dbAccess))
 
 }
